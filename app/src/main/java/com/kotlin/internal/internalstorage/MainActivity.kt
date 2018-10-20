@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     val PREF = "myPref"
-    var myPref: SharedPreferences?=null
+    var myPref: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,25 +21,30 @@ class MainActivity : AppCompatActivity() {
 
             myPref = getSharedPreferences(PREF, 0)
 
-            var editor : SharedPreferences.Editor =
+
+            var editor: SharedPreferences.Editor =
                     (myPref as SharedPreferences
                             ).edit()
 
-            if (!TextUtils.isEmpty(txtNombre.text.toString())){
-                editor.putString("misNombres",txtNombre.text.toString())
+            if (!TextUtils.isEmpty(txtNombre.text.toString())) {
+                editor.putString("misNombres", txtNombre.text.toString())
                 editor.commit()
-            } else{
-                Toast.makeText(this,"Ingrese Nombres",
+            } else {
+                Toast.makeText(this, "Ingrese Nombres",
                         Toast.LENGTH_SHORT).show()
             }
 
-            var retorno : SharedPreferences = getSharedPreferences(PREF,0)
 
-            if (retorno.contains("misNombres")){
-                txtResultado.text = retorno.getString("misNombres","no lo encontre")
+        }
+
+
+        btnAlmacenar.setOnClickListener {
+            var retorno: SharedPreferences = getSharedPreferences(PREF, 0)
+
+            if (retorno.contains("misNombres")) {
+                txtResultado.text = retorno.getString("misNombres", "no lo encontre")
 
             }
-
         }
     }
 }
